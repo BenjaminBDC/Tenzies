@@ -2,36 +2,34 @@ import React from 'react';
 import './App.css';
 import Die from './components/Die'
 
-function App()
+export default function App()
 {
+  const [dice, setDice] = React.useState(allNewDice())
+
   function allNewDice()
   {
-    const newDice = []
+    const newDice = [randomNumber= 0, isHeld= false]
     for (let i = 0; i < 10; i++)
     {
       newDice.push(Math.ceil(Math.random() * 6))
     }
     return newDice
   }
-  console.log(allNewDice())
 
+  const diceElements = dice.map(die => <Die value={die}  />)
+
+  function roll()
+  {
+    setDice(allNewDice())
+  }
   return (
     <main>
       <div className="dice-container">
-        <Die value="1" />
-        <Die value="2" />
-        <Die value="3" />
-        <Die value="4" />
-        <Die value="5" />
-        <Die value="6" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
-        <Die value="1" />
+        {diceElements}
       </div>
+      <button className="btn" onClick={roll}>
+       <h1>Roll the dice!</h1>
+      </button>
     </main>
   )
 }
-
-export default App;
-
